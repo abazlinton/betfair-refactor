@@ -1,6 +1,6 @@
 var https = require('https');
 
-var makeHttpRequest = function(reqOptions) {
+var httpRequest = function(reqOptions) {
   var options = {};
   options.hostname = reqOptions.hostname;
   options.path = reqOptions.path;
@@ -10,6 +10,7 @@ var makeHttpRequest = function(reqOptions) {
   var req = https.request(options, function(res) {
     res.on('data', function(data) {
       console.log(data.toString());
+      callback();
     });
   });
   req.on('error', function(e){
@@ -18,4 +19,4 @@ var makeHttpRequest = function(reqOptions) {
   req.end();
 }
 
-module.exports = makeHttpRequest;
+module.exports = httpRequest;
