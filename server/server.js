@@ -16,7 +16,9 @@ app.get('/events/:eventId/markets', function(req, res) {
   betfairHandler.sendMarketIdForMatchOdds(req.params.eventId, res);
 });
 
-
+app.get('/markets/:marketId/book', function(req, res) {
+  betfairHandler.sendBookForMarket(req.params.marketId, res);
+});
 
 app.listen(3001, function () {
   var host = this.address().address;

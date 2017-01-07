@@ -42,7 +42,7 @@ betfairBaseRequest.body.markets = {
 };
 
 betfairBaseRequest.body.marketBook = {
-  marketIds: [],
+  marketIds: [], // to be consistent Betfair should really expect this within filter{} as per other routes
   priceProjection: {
     priceData: ['EX_BEST_OFFERS'],
     exBestOfferOverRides: {

@@ -27,4 +27,17 @@ betfairHandler.sendMarketIdForMatchOdds = function(eventId, res) {
   httpRequest(options, JSON.stringify(betfairMarketIdRequest));
 };
 
+betfairHandler.sendBookForMarket = function(marketId, res) {
+  var betfairMarketBookRequest = betfairBaseRequest.body.marketBook;
+  betfairMarketBookRequest.marketIds.push(marketId.toString());
+  var options = betfairBaseRequest.options;
+  options.path = betfairBaseRequest.paths.marketBook;
+
+  options.callback = function(data) {
+    res.send(JSON.parse(data.toString()));
+  }
+
+  httpRequest(options, JSON.stringify(betfairMarketBookRequest));
+};
+
 module.exports = betfairHandler;
