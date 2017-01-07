@@ -1,5 +1,6 @@
 var betfairBaseRequest = require('./betfair_requests');
 var httpRequest = require('./http_request');
+var betfairCredentials = require('./betfair_credentials');
 
 var baseApiPath = "/exchange/betting/rest/v1.0/";
 
@@ -11,8 +12,8 @@ var betfairHandler = {
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
-    'X-Application': //set this in an environment variable
-    'X-Authentication': //set this in an environment variable
+    'X-Application': betfairCredentials.appKey,
+    'X-Authentication': betfairCredentials.sessionToken
   }
 };
 
