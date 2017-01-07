@@ -1,16 +1,32 @@
-var baseApiPath = "/exchange/betting/rest/v1.0/"
-var betfairBaseRequest = require('./betfair_requests')
+var betfairBaseRequest = require('./betfair_requests');
+var httpRequest = require('./http_request');
+
+var baseApiPath = "/exchange/betting/rest/v1.0/";
 
 var betfairHandler = {
   hostname: "api.betfair.com",
   eventsPath: baseApiPath + "listEvents/",
   marketsPath: baseApiPath + "listMarketCatalogue/",
-  marketBookPath: baseApiPath + "listMarketBook/"
-
+  marketBookPath: baseApiPath + "listMarketBook/",
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'X-Application': //set this in an environment variable
+    'X-Authentication': //set this in an environment variable
+  }
 };
 
 betfairHandler.sendEvents = function(res) {
-  res.send("Here are your events!");
+  var options = {
+    hostname: betfairHandler.hostname,
+    path: betfairHandler.eventsPath,
+    method: "POST", //Betfair don't follow REST properly
+    headers: betfairHandler.headers,
+    callback: function(data){
+      res.send(JSON.parse(data.toString()));
+    }
+  }
+  httpRequest(options, JSON.stringify(betfairBaseRequest.events));
 };
 
 betfairHandler.sendMatchOddsForEvent = function(eventId, res) {
