@@ -4,6 +4,8 @@ var path = require('path');
 var httpRequest = require('./models/http_request');
 var betfairHandler = require('./models/betfair_handler');
 
+app.use(express.static('../client/build/'));
+
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/../client/build/index.html'));
 });
