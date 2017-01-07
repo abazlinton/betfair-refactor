@@ -19,5 +19,5 @@ app.get('/events/:eventId/matchOdds', function(req, res) {
 app.listen(3001, function () {
   var host = this.address().address;
   var port = this.address().port;
-  console.log('Example app listening at http://%s:%s', host, port);
+  console.log('Betfair app listening at http://%s:%s', host, port);
 });
