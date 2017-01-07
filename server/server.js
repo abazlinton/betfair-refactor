@@ -12,9 +12,11 @@ app.get('/events', function(req, res) {
   betfairHandler.sendEvents(res);
 });
 
-app.get('/events/:eventId/matchOdds', function(req, res) {
-  betfairHandler.sendMatchOddsForEvent(req.params.eventId, res);
+app.get('/events/:eventId/markets', function(req, res) {
+  betfairHandler.sendMarketIdForMatchOdds(req.params.eventId, res);
 });
+
+
 
 app.listen(3001, function () {
   var host = this.address().address;

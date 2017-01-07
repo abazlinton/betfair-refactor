@@ -4,6 +4,25 @@ var betfairBaseRequest = {
   body: {}
 };
 
+betfairBaseRequest.options = {
+  hostname: "api.betfair.com",
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'X-Application': betfairCredentials.appKey,
+    'X-Authentication': betfairCredentials.sessionToken
+  },
+  method: "POST" //Betfair don't follow REST properly
+};
+
+var baseApiPath = "/exchange/betting/rest/v1.0/";
+
+betfairBaseRequest.paths = {
+  events: baseApiPath + "listEvents/",
+  markets: baseApiPath + "listMarketCatalogue/",
+  marketBook: baseApiPath + "listMarketBook/"
+}
+
 betfairBaseRequest.body.events = {
   filter: {
     competitionIds: ["31"], //football
@@ -38,23 +57,6 @@ betfairBaseRequest.body.marketBook = {
   matchProjection: 'ROLLED_UP_BY_PRICE'
 };
 
-var baseApiPath = "/exchange/betting/rest/v1.0/";
 
-betfairBaseRequest.paths = {
-  events: baseApiPath + "listEvents/",
-  markets: baseApiPath + "listMarketCatalogue/",
-  marketBook: baseApiPath + "listMarketBook/"
-}
-
-betfairBaseRequest.options = {
-  hostname: "api.betfair.com",
-  headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'X-Application': betfairCredentials.appKey,
-    'X-Authentication': betfairCredentials.sessionToken
-  },
-  method: "POST" //Betfair don't follow REST properly
-};
 
 module.exports = betfairBaseRequest;
