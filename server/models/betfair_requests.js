@@ -1,6 +1,29 @@
-var betfairBaseRequest = {}
+var betfairCredentials = require('./betfair_credentials');
 
-betfairBaseRequest.events = {
+var betfairBaseRequest = {
+  body: {}
+};
+
+betfairBaseRequest.options = {
+  hostname: "api.betfair.com",
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'X-Application': betfairCredentials.appKey,
+    'X-Authentication': betfairCredentials.sessionToken
+  },
+  method: "POST" //Betfair don't follow REST properly
+};
+
+var baseApiPath = "/exchange/betting/rest/v1.0/";
+
+betfairBaseRequest.paths = {
+  events: baseApiPath + "listEvents/",
+  markets: baseApiPath + "listMarketCatalogue/",
+  marketBook: baseApiPath + "listMarketBook/"
+}
+
+betfairBaseRequest.body.events = {
   filter: {
     competitionIds: ["31"], //football
     // marketTypeCodes here prevents the non-match events appearing (e.g winner 2017 etc)
@@ -8,7 +31,7 @@ betfairBaseRequest.events = {
   }
 };
 
-betfairBaseRequest.markets = {
+betfairBaseRequest.body.markets = {
   filter: {
     eventIds: [],
     marketTypeCodes: ['MATCH_ODDS']
@@ -18,8 +41,8 @@ betfairBaseRequest.markets = {
   marketProjection: ['RUNNER_DESCRIPTION']
 };
 
-betfairBaseRequest.marketBook = {
-  marketIds: [],
+betfairBaseRequest.body.marketBook = {
+  marketIds: [], // to be consistent Betfair should really expect this within filter{} as per other routes
   priceProjection: {
     priceData: ['EX_BEST_OFFERS'],
     exBestOfferOverRides: {
@@ -33,5 +56,7 @@ betfairBaseRequest.marketBook = {
   orderProjection: 'ALL',
   matchProjection: 'ROLLED_UP_BY_PRICE'
 };
+
+
 
 module.exports = betfairBaseRequest;
