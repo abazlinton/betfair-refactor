@@ -8,4 +8,4 @@ This a project I am refactoring that was the result of a weekend assignment at C
 
 - The API insists on a trailing slash on the resource e.g. "listMarketCatalogue/". This should not matter and I would have thought a prefernce for no slash would be better than requiring one.
 
-- The API is not consistent with itself. 
+- The API is not internally consistent. The "listMarketBook/" takes a filter in the body, but does not supply a filter object (filter:{}) as per the other resources I am using.
