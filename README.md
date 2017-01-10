@@ -1,5 +1,7 @@
 # betfair-refactor
 
+A small project to pull events / markets / market odds data from the Betfair API for English Premier league fixtures.
+
 - Node.js
 - Express
 - Betfair API
@@ -15,3 +17,7 @@ This a project I am refactoring that was the result of a weekend assignment at C
 - The API is not internally consistent. The "listMarketBook/" takes a filter in the body, but does not supply the filter within an object (filter:{}) as per the other resources I am using.
 
 This assignment was also intended as an exercise in running the API requests in the browser (via XMLHttpRequest). But as the Betfair API does not seem to support CORS I have had to actually make the requests in node. Then have the browser send requests to my express server rather than the API directly. This has had the side benefit of allowing me to restructure the resources so that the client can make more sensible requests that the Betfair API itself supports.
+
+##
+
+This is still a WIP. It is currently focussed on the English Premier League, but really there's no reason it shouldn't cater for other events and sports.
