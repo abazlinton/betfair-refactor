@@ -1,7 +1,5 @@
 # betfair-refactor
 
-A small project to retrieve Betfair odds data for English Premiership fixtures. Using
-
 - Node.js
 - Express
 - Betfair API
